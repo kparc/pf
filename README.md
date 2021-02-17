@@ -4,7 +4,7 @@
 
 what you get:
 
-* format string parser recognizes `%[%0#-][09][.09*]dcups`
+* format string parser that recognizes `%[%0#-][09][.09*]dcups`
 * `%d` and `%u` are also longs, `[lh]` prefixes are nop.
 * works well on bare iron riscv, aarch, xtensa, 32/64.
 * total absence of thread safety and floats.
