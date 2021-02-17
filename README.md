@@ -72,8 +72,8 @@ the maximum number of arguments at compile time by defining `PFMX`, which
 defaults to `8` and can't be more than `16`. calling `pf` with more than
 `PFMX` positional arguments under `tcc` is a compile-time error.
 
-for `clang` and `gcc` builds, the number of arguments is limited by the size of
-your stack.
+for `clang` and `gcc` builds, the number of arguments is limited by imagination
+and stack size.
 
 ## test
 
