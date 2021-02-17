@@ -11,6 +11,11 @@ what you get:
 * unsupported features are filtered out.
 * freestanding elf ~9kb.
 
+posix-breaking features:
+
+* `pf` doesn't support `%n` and is therefore safe and not Turing-complete, see [best of show](https://www.ioccc.org/2020/carlini/index.html).
+* `pf` outputs `(null)` on argument deficiency instead of catching segv or somebody's shellcode.
+
 ## tl;dr
 
 minimal test:
