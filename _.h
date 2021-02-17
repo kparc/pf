@@ -32,7 +32,7 @@ typedef void _;typedef unsigned char*S,G;typedef unsigned short H;typedef int I;
 
 //! limit scope as much as you can:
 #define ZG                static G
-#define ZH                static G
+#define ZH                static H
 #define ZI                static I
 #define ZS                static S
 #define ZJ                static J
