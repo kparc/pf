@@ -183,4 +183,9 @@ safe to be ignored, no lossy casts are taking place.
 because this way the software is faster to write, easier to read, and safer to run.
 your mileage may vary.
 
+> how to write software this way?
+
+an epic question, answer is [here](https://github.com/kelas/pf/issues/1#issuecomment-780178557).
+
+
 `//:~`
