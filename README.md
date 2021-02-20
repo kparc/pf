@@ -171,11 +171,6 @@ compatibility and is therefore not documented. there are hardly any
 user-serviceable parts in the code, so please let us now if you think
 you have found a bug, or have a great feature suggestion in mind.
 
-> your software doesn't compile with `gcc version 4.4.7 20120313`
-
-for older compiler technology, relaxing `-Werror -pedantic` in `makefile` 
-is known to work. ensuing compilation warnings are safe to ignore.
-
 ## more faq
 
 > why the dummy `union{UJ}`?
@@ -197,5 +192,9 @@ your mileage may vary.
 
 good question, [here](https://github.com/kelas/pf/issues/1#issuecomment-780178557).
 
+> your software doesn't compile with `gcc version 4.4.7 20120313`
+
+for older compiler technology, relaxing `-Werror -pedantic` in `makefile` 
+is known to work. ensuing compilation warnings are safe to ignore.
 
 `//:~`
