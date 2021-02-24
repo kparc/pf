@@ -1,6 +1,6 @@
 ## pf(f,a..)
 
-[pf.h](https://github.com/kelas/pf/blob/master/pf.h) is a `printf()` shim intended for embedded systems, in about 40 sloc of C (plus a few handy macros).
+[pf.h](https://github.com/kelas/pf/blob/master/pf.h) is a `printf(3)` shim intended for embedded systems, in about 40 sloc of C (plus a few handy macros).
 
 what you get:
 
@@ -9,7 +9,7 @@ what you get:
 * works well on bare metal riscv, aarch, xtensa, 32/64.
 * total absence of thread safety and floats.
 * unsupported features are filtered out.
-* freestanding elf ~9kb.
+* freestanding elf ~2kb.
 
 posix-breaking features:
 
