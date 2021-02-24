@@ -160,7 +160,7 @@ home about, you should probably use local `printf(3)`.
 
 the code in `pf.h` is subject to terms of bsd-2-clause, whereas `_.h` is
 placed in public domain by the [regents of kparc](https://github.com/kparc).
-if you so desire, you are welcome to amalgamize `_.h` and `pf.h` into a single header,
+if you so desire, you are welcome to amalgamate `_.h` and `pf.h` into a single header,
 at a small expense of not being able to easily receive updates from this repository
 in the future.
 
