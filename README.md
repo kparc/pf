@@ -135,7 +135,8 @@ $
 `pf(f,a...)` is a variadic macro which is used to initialize an anonymous
 array of uint64's (of maximal length `PFMX` in case of `tcc`) with the contents of `a...` on
 stack, and count its elements. array pointer and its element count are both passed to
-`txpf()`, which `txpf()` downcasts longs according to the format specification, and prints them.
+`txpf()`, a functiion which parses the format string, downcasts longs according to the 
+format specification, and writes them to stdout.
 
 > what's the catch?
 
