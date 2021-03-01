@@ -97,8 +97,9 @@ I txpf(char*f,args a,I ac){P(!f,f)             //!< (f)ormat string (aka tape), 
    Z(!j,Z('*'-c,f++;continue)                  //!< invalid precision is empty field
     c=*++f;varg(prc)))c=*f;                    //!< scan positional precision (%.*)
   W('l'==c||'h'==c)c=*++f;                     //!< skip [lh..]
-  Z(ac==i,vtx(txs,"(null)"))                   //!< print (null) on argc overflow
-  SW(c,va('c',G,txb)va('d',J,txj)va('u',UJ,txu)va('p',UJ,txx)va('s',char*,txs))
+  Z(ac==i,vtx(txs,"(null)"))                   //!< print (null) on argc overflow, otherwise:
+  //! flush  (G)byte   (J)longint   (U)nsignedlongint   he(x)   (s)tring
+  SW(c,va('c',G,txb)va('d',J,txj)va('u',UJ,txu)va('p',UJ,txx)va('s',char*,txs)) 
   f++;}R n;}
 
 #pragma GCC diagnostic pop
