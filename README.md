@@ -141,16 +141,17 @@ format specification, and writes them to stdout.
 > what's the catch?
 
 since arguments of any type are upcast to `unsigned long long` and passed exclusively on stack,
-`pf()` wins portability in return for much less efficient use of resources compared to ABI-specific
-`va_arg` routines. use those if you can. too many positional arguments will smash your stack, therefore:
+`pf()` wins independence from standard library in return for much less efficient use of resources 
+compared to ABI- and compiler-specific `va_arg` routines. use those if you can. too many positional 
+arguments will smash your stack, therefore:
 
-a) if you are using `tcc`, choose `PFMX` wisely.
+a) protect your stack.
 
-b) if you're absolutely sure your pointers are 32-bit and you don't need to print
+b) if you are using `tcc`, choose `PFMX` wisely.
+
+c) if you're absolutely sure your pointers are 32-bit and you don't need to print
 longs, redeclare `union` to use `UI` instead of `UJ`. if you're not sure what
 any of this means, `pf()` is not for you. caveat emptor.
-
-c) protect your stack.
 
 > will it work on my operating system?
 
