@@ -18,29 +18,35 @@ int
 main(int argc, char**argv)
 {
 
-  printf("\n  pf %d.%02d.%02d %s %s\n", PFV1, PFV2, PFV3, PFA, PFL);
+  printf("\n  pf %d.%02d.%02d %s\n", PFV1, PFV2, PFV3, PFL);
 
   const char *t_prc = "kparcxxxx";
 
-  printf("\n  (%%)=(%%) (kparc)=(%.*s) (kparc)=(%.5s) ()=(%.s)\n", 5, t_prc, t_prc, t_prc);
+  printf("\n  (%%)=(%%)                                // literal percent sign\n");
+  printf("  (str)=(%.*s)                          // strlen limit #1\n", 5, t_prc);
+  printf("  (str)=(%.5s) (str)=(%.5s)            // strlen limit #2\n     ", t_prc, t_prc);
+  printf("  % 15d", -42);
 
-  const unsigned long long umx = 18446744073709551615ULL;
-  const long long jmx = 9223372036854775807LL;
-  const unsigned int uimx = 4294967295U;
-  const int imx = 2147483647;
+  const unsigned long long umx = 18446744073709551615ULL;  //!< max unsigned long long
+  const long long jmx = 9223372036854775807LL;             //!< max long long
+  const unsigned int uimx = 4294967295U;                   //!< max unsigned int
+  const int imx = 2147483647;                              //!< max int
 
   printf("\n"
-    "   umx = (%20llu)\n"
-    "   jmn = (%20lld)\n"
-    "   jmx = (%20lld)\n"
-    "   imn = (%20d)\n"
-    "   imx = (%-20d)\n"
-    "  uimx = (%-20u)\n",
+    "   umx = (%20llu)          // max unsigned long long\n"
+    "   jmn = (%20lld)          // min unsigned long\n"
+    "   jmx = (%20lld)          // max unsigned long\n"
+    "   imn = (%20d)          // min int\n"
+    "   imx = (%-20d)          // max int\n"
+    "  uimx = (%-20u)          // max unsigned int\n",
     umx, -jmx, jmx, -imx, imx, uimx);
 
-  printf("\n  pmx32 = (%19p)\n  pmx64 = (%19p)\n",uimx, umx);
+  printf("\n");
 
-  printf("\n  0pad0 = (%08d) (%-08d)\n", 77777, 77777);
+  printf("  pmx32 = (%19p)          // max ptr 32\n", uimx);
+  printf("  pmx64 = (%19p)          // max ptr 64\n", umx);
+
+  printf("\n  0pad0 = (%08d) (%-08d)          // zero pad left/right\n", 77777, 77777);
 
   char *ti;
   char *t[] = {"atw", "nsl", "attila", "icsa", "alex", "ktye", "kelas"};
@@ -82,7 +88,7 @@ main(int argc, char**argv)
   #else
   printf("\n  PFMX=%d excess arguments (%d%d%d%d%d%d%d%d%d%d%d) = (1234567891011)",
    PFMX, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11);
-  printf(" (unbound for printf(3))\n");
+  printf(" (should be unbound for native printf(3))\n");
   #endif//PF
 
   //! argcount overflow
@@ -92,16 +98,16 @@ main(int argc, char**argv)
   printf("\n  argc overflow (one)=(%s) (two)=(%s) (three)=(*** SEGV ***) four=(*** SEGV ***)=(%s)\n", "one", "two");
   #endif
 
-  //! return value
-  printf(" n=(%d) %s\n\n",
+  //! nesting+retval
+  int r = printf(" r=(%d) %s\n\n",
    printf("\n  nesting+retval: s=(%s %s %s) p=(%p)=(%u) c=(%c) eot=(%p)",
        "i uncover", "the soul-destroying", "abhorrence", 0xcafebabe, 0xcafebabe, 'K', 0x04),
   "//:~");
 
 #ifdef NOLC
-  exit(0);
+  exit(r);
 #endif
-  return 0;
+  return r;
 }
 
 //:~

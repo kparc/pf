@@ -100,7 +100,7 @@ I txpf(char*f,args a,I ac){P(!f,f)             //!< (f)ormat string (aka tape), 
   Z(ac==i,vtx(txs,"(null)"))                   //!< print (null) on argc overflow, otherwise:
   //! flush  (G)char   (J)longint   (U)nsignedlongint   he(x)   (s)tring
   SW(c,va('c',G,txb)va('d',J,txj)va('u',UJ,txu)va('p',UJ,txx)va('s',char*,txs)) 
-  f++;}R n;}
+  f++;}R 0;}
 
 #pragma GCC diagnostic pop
 #else
