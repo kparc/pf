@@ -1,6 +1,6 @@
 ## pf(f,a..)
 
-[pf.h](https://github.com/kelas/pf/blob/master/pf.h) is a `printf(3)` shim intended for embedded systems, in about 40 sloc of C (plus a few handy macros).
+[pf.h](/pf.h) is a `printf(3)` shim for embedded systems in about 40 sloc of C (plus a few handy macros).
 
 what you get:
 
@@ -15,6 +15,7 @@ posix-breaking features:
 
 * `pf` doesn't support `%n` and is therefore safe and not Turing-complete, see [best of show](https://www.ioccc.org/2020/carlini/index.html).
 * `pf` outputs `(null)` on argument deficiency instead of catching segv or somebody's shellcode.
+* `pf` returns number of bytes written, printf(3) returns 0 on success.
 
 ## tl;dr
 
@@ -77,7 +78,7 @@ and stack size.
 
 ## test
 
-`t.c` is like `m.c`, only more involved.
+[t.c](/t.c) is like [m.c](/m.c), only more involved.
 
 it can be built to your target architecture with `clang12`, `gcc10`, `tcc-mob`,
 and supports both 32- and 64-bit. `makefile` targets are:
@@ -182,8 +183,8 @@ and `clang` are aware of that).
 
 > why `int-conversion` warning is suppressed?
 
-it is only suppressed in `pf.h`, not in your code. ptr-to-ULL warning is
-safe to be ignored, no lossy casts are taking place.
+it is only suppressed in `pf.h`, not in your code. ptr-to-ULL cast warning is
+safe to ignore, no lossy casts are taking place.
 
 > why this software is written this way?
 
@@ -192,7 +193,7 @@ your mileage may vary.
 
 > how to write software this way?
 
-good question, [here](https://github.com/kelas/pf/issues/1#issuecomment-780178557).
+good question, [here](https://github.com/kparc/ksimple).
 
 > your software doesn't compile with `gcc version 4.4.7 20120313`
 
