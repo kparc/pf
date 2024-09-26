@@ -18,23 +18,53 @@ posix-breaking features:
 
 ## tl;dr
 
-minimal test:
+a generic smoke test is just:
 
 ```c
-$ cd pf && cat m.c
-#include"pf.h"
-int
-main(int argc, char **argv)
-{
-    printf("\n pf %d.%02d.%02d %s\n\n", PFV1, PFV2, PFV3, PFL);
-    printf(" hey, %s\n\n", "guacamole!");
-    printf(" %p //:~\n\n", 0x04);
-    exit(0);
-}
-//:~
+% make
+
+  pf 2021.02.14 (c) 2020 kparc / bsd
+
+  (%)=(%)                                // literal percent sign
+  (str)=(kparc)                          // strlen limit #1
+  (str)=(kparc) (str)=(kparc)            // strlen limit #2
+       15d
+   umx = (18446744073709551615)          // max unsigned long long
+   jmn = (-9223372036854775807)          // min unsigned long
+   jmx = ( 9223372036854775807)          // max unsigned long
+   imn = (         -2147483647)          // min int
+   imx = (2147483647          )          // max int
+  uimx = (4294967295          )          // max unsigned int
+
+  pmx32 = (         0xffffffff)          // max ptr 32
+  pmx64 = ( 0xffffffffffffffff)          // max ptr 64
+
+  0pad0 = (00077777) (77777   )          // zero pad left/right
+
+  0|atw     |     atw|  3|3   |          0xdeadbeef|0x04 |  k|k  |%|kparc|%|
+  1|nsl     |     nsl|  3|3   |          0xdeadbeef|0x04 |  k|k  |%|kparc|%|
+  2|attila  |  attila|  6|6   |          0xdeadbeef|0x04 |  k|k  |%|kparc|%|
+  3|icsa    |    icsa|  4|4   |          0xdeadbeef|0x04 |  k|k  |%|kparc|%|
+  4|alex    |    alex|  4|4   |          0xdeadbeef|0x04 |  k|k  |%|kparc|%|
+  5|ktye    |    ktye|  4|4   |          0xdeadbeef|0x04 |  k|k  |%|kparc|%|
+  6|kelas   |   kelas|  5|5   |          0xdeadbeef|0x04 |  k|k  |%|kparc|%|
+
+  (empty arglist) = (ok)
+
+  PFCH=1 printf('~') = (~)
+
+  PFMX=0 excess arguments (1234567891011) = (1234567891011) (unbound for gcc/clang builds)
+
+  argc overflow (one)=(one) (two)=(two) (three)=((null)) (four)=((null))
+
+  nesting+retval: s=(i uncover the soul-destroying abhorrence) p=(0xcafebabe)=(3405691582) c=(K) eot=(0x04) r=(0) //:~
 ```
 
-try it like so:
+(`make r` is the *reference* outut of the same code using your local `printf(3)`, it is a good idea to compare them)
+
+although using `pf()` makes very little sense on a healthy x86/amd64 linux box, it provides an easy way to ensure that `pf()` also survives a pedantic freestading build using a stock compiler with standard library explicitly disabled.
+
+we will only need a few lines of assembly for the entry point, `write(1)` and `exit(1)`:
 
 ```bash
 $ make m
@@ -52,7 +82,7 @@ $ make m
 $
 ```
 
-## why?
+## what for?
 
 generally speaking, there is no portable way to implement a drop-in nostdlib
 replacement for `printf(3)`, since `va_arg` is an architecture-specific
