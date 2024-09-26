@@ -7,7 +7,7 @@
 int main(..){printf("hello world.\n");}
 ```
 
-## tl;dr:
+## tl;dr
 
 * `pf()` is a `printf(3)` which doesn't do floating point, but gets pretty far with integers and strings.
 * `pf()` fixes some known posix deficiencies, which is a questionable idea.
