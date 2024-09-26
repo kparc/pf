@@ -166,7 +166,7 @@ $
 
 ## faq
 
-> what's the idea?
+> how does it work?
 
 `pf(f,a...)` is a variadic macro which is used to initialize an anonymous
 array of uint64's (of maximal length `PFMX` in case of `tcc`) with the contents of `a...` on
@@ -226,13 +226,13 @@ safe to ignore, no lossy casts are taking place.
 because this way the software is faster to write, easier to read, and safer to run.
 your mileage may vary.
 
-> how to write software this way?
-
-good question, [here](https://github.com/kparc/ksimple).
-
 > your software doesn't compile with `gcc version 4.4.7 20120313`
 
 for older compiler technology, relaxing `-Werror -pedantic` in `makefile` 
 is known to work. ensuing compilation warnings are safe to ignore.
+
+> how to write software this way?
+
+good question.
 
 `//:~`
