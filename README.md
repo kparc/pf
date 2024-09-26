@@ -7,6 +7,12 @@
 int main(..){printf("hello world.\n");}
 ```
 
+## tl;dr:
+
+* `pf()` is a `printf(3)` which doesn't do floating point, but gets pretty far with integers and strings.
+* `pf()` fixes some known posix deficiencies, which is a questionable idea.
+* `pf()` it tiny.
+
 what you get:
 
 * format string parser that recognizes `%[%0#-][09][.09*]dcups`
@@ -18,16 +24,10 @@ what you get:
 
 posix-breaking features:
 
-* `pf` doesn't support `%n` and is therefore safe and not Turing-complete, see [best of show](https://www.ioccc.org/2020/carlini/index.html).
-* `pf` outputs `(null)` on argument deficiency instead of catching segv or somebody's shellcode.
+* `pf()` doesn't support `%n` and is therefore safe and not Turing-complete, see [best of show](https://www.ioccc.org/2020/carlini/index.html).
+* `pf()` outputs `(null)` on argument deficiency instead of catching segv or somebody's shellcode.
 
-once again:
-
-* `pf` is a `printf(3)` which doesn't do floating point, but gets pretty far with integers and strings.
-* `pf` fixes some known posix deficiencies, which is a terrible idea.
-* `pf` it tiny.
-
-## tl;dr
+## test it
 
 a generic smoke test is just:
 
@@ -73,9 +73,7 @@ a generic smoke test is just:
 
 (`make r` is the *reference* outut of the same code using your local `printf(3)`, it is a good idea to compare them)
 
-although using `pf()` makes very little sense on a healthy x86/amd64 linux box, it provides an easy way to ensure that `pf()` also survives a pedantic freestading build using a stock compiler with standard library explicitly disabled.
-
-we will only need a few lines of assembly for the entry point, `write(1)` and `exit(1)`:
+although using `pf()` makes very little sense on a healthy x86/amd64 linux box, it provides an easy way to ensure that `pf()` also survives a pedantic freestading build using a stock compiler with standard library explicitly disabled. we will only need a few lines of assembly for the entry point, `write(2)` and `exit(2)`:
 
 ```bash
 $ make m
@@ -226,15 +224,15 @@ and `clang` are aware of that).
 it is only suppressed in `pf.h`, not in your code. ptr-to-ULL cast warning is
 safe to ignore, no lossy casts are taking place.
 
-> why this software is written this way?
-
-because this way the software is faster to write, easier to read, and safer to run.
-your mileage may vary.
-
 > your software doesn't compile with `gcc version 4.4.7 20120313`
 
 for older compiler technology, relaxing `-Werror -pedantic` in `makefile` 
 is known to work. ensuing compilation warnings are safe to ignore.
+
+> why this software is written this way?
+
+because this way the software is faster to write, easier to read, and safer to run.
+your mileage may vary.
 
 > how to write software this way?
 
