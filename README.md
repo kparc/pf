@@ -15,7 +15,6 @@ posix-breaking features:
 
 * `pf` doesn't support `%n` and is therefore safe and not Turing-complete, see [best of show](https://www.ioccc.org/2020/carlini/index.html).
 * `pf` outputs `(null)` on argument deficiency instead of catching segv or somebody's shellcode.
-* `pf` returns number of bytes written, printf(3) returns 0 on success.
 
 ## tl;dr
 
@@ -124,7 +123,7 @@ $ make m|t|c|l|t32|t64|c32|c64|l32|l64|s64|r
 
   argc overflow (one)=(one) (two)=(two) (three)=((null)) (four)=((null))
 
-  nesting+retval: s=(i uncover the soul-destroying abhorrence) p=(0xcafebabe)=(3405691582) c=(K) eot=(0x04) n=(108) //:~
+  nesting+retval: s=(i uncover the soul-destroying abhorrence) p=(0xcafebabe)=(3405691582) c=(K) eot=(0x04) n=(0) //:~
 
 $
 ```
