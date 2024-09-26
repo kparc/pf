@@ -23,9 +23,9 @@ posix-breaking features:
 
 once again:
 
-* `pf` doesn't do floating point, but it gets pretty far with integers and strings.
+* `pf` is a `printf(3)` which doesn't do floating point, but gets pretty far with integers and strings.
 * `pf` fixes some known posix deficiencies, which is a terrible idea.
-* `pf` it's tiny.
+* `pf` it tiny.
 
 ## tl;dr
 
