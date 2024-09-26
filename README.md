@@ -1,11 +1,16 @@
 ## pf(f,a..)
 
-[pf.h](/pf.h) is a `printf(3)` shim for embedded systems in about 40 sloc of C (plus a few handy macros).
+[pf.h](/pf.h) is a drop-in `printf(3)` replacement for embedded systems in about 40 sloc of C. it works like so:
+
+```
+#include "pf.h"
+int main(..){printf("hello world.\n");}
+```
 
 what you get:
 
 * format string parser that recognizes `%[%0#-][09][.09*]dcups`
-* `%d` and `%u` are also longs, `[lh]` prefixes are nop.
+* `%d` and `%u` are treated as longs, so `[lh]` prefixes are nop.
 * works well on bare metal riscv, aarch, xtensa, 32/64.
 * total absence of thread safety and floats.
 * unsupported features are filtered out.
@@ -15,12 +20,12 @@ posix-breaking features:
 
 * `pf` doesn't support `%n` and is therefore safe and not Turing-complete, see [best of show](https://www.ioccc.org/2020/carlini/index.html).
 * `pf` outputs `(null)` on argument deficiency instead of catching segv or somebody's shellcode.
-* to be clear, `pf` fixes some known posix deficiencies, which is a terrible idea.
 
 once again:
 
 * `pf` doesn't do floating point, but it gets pretty far with integers and strings.
-* it's tiny.
+* `pf` fixes some known posix deficiencies, which is a terrible idea.
+* `pf` it's tiny.
 
 ## tl;dr
 
